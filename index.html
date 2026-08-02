@@ -201,6 +201,67 @@
   .phase .p-body ul li{ font-size:13.5px; color:var(--text-muted); margin-bottom:3px; }
 
   /* ================= FOOTER ================= */
+  /* ================= CONTACT ================= */
+  .contact-form{
+    display:grid;
+    gap:16px;
+    margin-top:24px;
+  }
+  .contact-form label{
+    display:grid;
+    gap:7px;
+    font-size:12.5px;
+    font-weight:500;
+    color:var(--text-muted);
+  }
+  .contact-form input,
+  .contact-form select,
+  .contact-form textarea{
+    width:100%;
+    border:1px solid var(--border-strong);
+    border-radius:var(--radius-sm);
+    background:var(--surface-2);
+    color:var(--text);
+    font:inherit;
+    font-size:14px;
+    padding:11px 12px;
+  }
+  .contact-form input,
+  .contact-form select{
+    min-height:42px;
+  }
+  .contact-form textarea{
+    min-height:150px;
+    resize:vertical;
+    line-height:1.6;
+  }
+  .contact-form input:focus,
+  .contact-form select:focus,
+  .contact-form textarea:focus{
+    outline:2px solid var(--accent);
+    outline-offset:1px;
+  }
+  .contact-form button{
+    border:0;
+    cursor:pointer;
+    justify-self:start;
+  }
+  .contact-form button:disabled{
+    opacity:.6;
+    cursor:wait;
+  }
+  .form-status{
+    margin:0;
+    font-size:13px;
+    color:var(--text-dim);
+  }
+  .form-status.success{
+    color:var(--accent-hover);
+  }
+  .form-status.error{
+    color:#E8A0A0;
+  }
+
   footer{ border-top:1px solid var(--border); padding:56px 0 40px; }
   .footer-grid{ display:grid; grid-template-columns:1.4fr repeat(2, 1fr); gap:40px; }
   .footer-brand p{ font-size:13px; color:var(--text-dim); max-width:280px; line-height:1.6; margin-top:14px; }
@@ -236,6 +297,7 @@
       <a href="#privacy">Privacy</a>
       <a href="#milestones">Milestones</a>
       <a href="#funding">Funding</a>
+      <a href="#contact">Contact</a>
     </div>
   </div>
 </div>
@@ -247,7 +309,7 @@
     <p class="quote">Can a machine learn presence without watching a person?</p>
     <div class="hero-actions">
       <a class="btn primary large" href="#introduction">Read the research</a>
-      <a class="btn ghost large" href="#funding">Support the Research</a>
+      <a class="btn ghost large" href="#contact">Support the Research</a>
     </div>
   </div>
 </header>
@@ -454,9 +516,85 @@
   </div>
 </section>
 
+<section class="doc-section" id="contact">
+  <div class="container-narrow">
+    <div class="sec-head">
+      <div class="sec-idx mono">12</div>
+      <h2>Contact the Project</h2>
+    </div>
+
+    <p>Interested in supporting, collaborating on, or discussing the research?</p>
+    <p>Send a message directly to the Resonance Machine project.</p>
+
+    <form
+      id="contact-form"
+      class="panel contact-form"
+      action="https://formspree.io/f/xdaqqkrw"
+      method="POST"
+    >
+      <input
+        type="hidden"
+        name="_subject"
+        value="New Resonance Machine website message"
+      >
+
+      <label>
+        Name
+        <input
+          name="name"
+          type="text"
+          autocomplete="name"
+          placeholder="Your name"
+          required
+        >
+      </label>
+
+      <label>
+        Email
+        <input
+          name="email"
+          type="email"
+          autocomplete="email"
+          placeholder="you@example.com"
+          required
+        >
+      </label>
+
+      <label>
+        Area of interest
+        <select name="interest" required>
+          <option value="" selected disabled>Select one</option>
+          <option value="Research collaboration">Research collaboration</option>
+          <option value="Funding or sponsorship">Funding or sponsorship</option>
+          <option value="Technical contribution">Technical contribution</option>
+          <option value="Press or media">Press or media</option>
+          <option value="Other">Other</option>
+        </select>
+      </label>
+
+      <label>
+        Message
+        <textarea
+          name="message"
+          placeholder="Tell us what you would like to discuss."
+          required
+        ></textarea>
+      </label>
+
+      <button class="btn primary large" type="submit">
+        Send message
+      </button>
+
+      <p id="form-status" class="form-status" role="status" aria-live="polite">
+        Messages are delivered privately to the project inbox.
+      </p>
+    </form>
+  </div>
+</section>
+
 <section class="doc-section" id="why-support">
   <div class="container-narrow">
-    <div class="sec-head"><div class="sec-idx mono">12</div><h2>Why Support This Project?</h2></div>
+    <div class="sec-head"><div class="sec-idx mono">13</div><h2>Why Support This Project?</h2></div>
     <p>Fundamental research should not be limited to billion-dollar laboratories.</p>
     <p>Important ideas can emerge from small independent research teams willing to ask unusual questions.</p>
     <p>We believe this question is worth investigating.</p>
@@ -465,7 +603,7 @@
 
 <section class="doc-section" id="closing">
   <div class="container-narrow">
-    <div class="sec-head"><div class="sec-idx mono">13</div><h2>Closing</h2></div>
+    <div class="sec-head"><div class="sec-idx mono">14</div><h2>Closing</h2></div>
     <p>Humanity has already given machines its books.</p>
     <p>Its images.</p>
     <p>Its language.</p>
@@ -493,8 +631,9 @@
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Support</h4>
+      <h4>Connect</h4>
       <ul>
+        <li><a href="#contact">Contact the Project</a></li>
         <li><a href="#funding">Funding</a></li>
       </ul>
     </div>
@@ -504,5 +643,48 @@
   </div>
 </footer>
 
+<script>
+  (() => {
+    const form = document.getElementById("contact-form");
+    if (!form) return;
+
+    const status = document.getElementById("form-status");
+    const button = form.querySelector('button[type="submit"]');
+    const defaultLabel = button.textContent.trim();
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      button.disabled = true;
+      button.textContent = "Sending...";
+      status.className = "form-status";
+      status.textContent = "Sending your message...";
+
+      try {
+        const response = await fetch(form.action, {
+          method: "POST",
+          body: new FormData(form),
+          headers: {
+            "Accept": "application/json"
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error("The message could not be sent. Please try again.");
+        }
+
+        form.reset();
+        status.className = "form-status success";
+        status.textContent = "Thank you — your message has been sent.";
+      } catch (error) {
+        status.className = "form-status error";
+        status.textContent = error.message;
+      } finally {
+        button.disabled = false;
+        button.textContent = defaultLabel;
+      }
+    });
+  })();
+</script>
 </body>
 </html>
