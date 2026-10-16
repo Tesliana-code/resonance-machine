@@ -72,7 +72,7 @@ Support the research
 
 Initial funding is intended for sensing hardware, prototype construction, calibration, data acquisition, local computing infrastructure, and long-term experimentation.
 
-Patreon: https://patreon.com/resonancemachine
+Patreon: https://www.patreon.com/c/resonancemachine/membership
 
 Repository
 
